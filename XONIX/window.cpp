@@ -1,12 +1,17 @@
 #include "window.h"
 #include <iostream>
 #include <SDL_image.h>
+#include <windows.h>
+#include <stdio.h>
+#include <locale.h>
 
 SDL_Window* window = NULL;
 SDL_Renderer* ren = NULL;
 
 void DeInitSDL(int error)
 {
+    return;
+
 	SDL_DestroyRenderer(ren);
 	SDL_DestroyWindow(window);
 	IMG_Quit();
@@ -27,24 +32,24 @@ void InitSDL()
 	if (window == NULL)
 	{
 		printf("Не удалось создать окно!");
-		DeInitSDL(1);
+		DeInitSDL(2);
 	}
 	
 	ren = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (ren == NULL)
 	{
 		printf("Не удалось создать рисовальщик!");
-		DeInitSDL(1);
+		DeInitSDL(3);
 	}
 
 	int res;
 	if ((res = IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)) == 0)
 	{
 		printf("Не удалось инициализировать SDL_Image!");
-		DeInitSDL(1);
+		DeInitSDL(4);
 	}
-	if (!IMG_INIT_PNG)	printf("Не удалось инициализировать библиотеку PNG.\n");
-	if (!IMG_INIT_JPG)	printf("Не удалось инициализировать библиотеку JPG.\n");
+	if ((res & IMG_INIT_PNG) ==0)	printf("Не удалось инициализировать библиотеку PNG.\n");
+	if ((res & IMG_INIT_JPG) ==0)	printf("Не удалось инициализировать библиотеку JPG.\n");
 }
 
 void InitFont(TTF_Font*& font)
@@ -52,7 +57,7 @@ void InitFont(TTF_Font*& font)
 	if (TTF_Init())
 	{
 		printf("Не удалось инициализировать шрифт!");
-		DeInitSDL(1);
+		DeInitSDL(5);
 	}
 	font = TTF_OpenFont("resources/mrd_aachen_bold.ttf", 50);
 }

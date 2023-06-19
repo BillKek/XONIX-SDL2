@@ -71,7 +71,7 @@ void RenderButtons(SDL_Renderer* ren, MenuButton& menuButton)
 		SDL_RenderCopy(ren, menuButton.button[number].buttonBack, NULL, &menuButton.button[number].button);
 		
 		SDL_Texture* tButton = SDL_CreateTextureFromSurface(ren, menuButton.button[number].textButton);
-		SDL_Rect rButton = { WIN_WIDTH / 2 - BUTTON_WIDTH / 4 * 2.5, WIN_HEIGHT / 6 + 7 + number * 100, 300, 50 };
+		SDL_Rect rButton = { (int)(WIN_WIDTH / 2 - BUTTON_WIDTH / 4 * 2.5), (int)(WIN_HEIGHT / 6 + 7 + number * 100), 300, 50 };
 		SDL_RenderCopy(ren, tButton, NULL, &rButton);
 		SDL_DestroyTexture(tButton);
 
@@ -105,6 +105,8 @@ int UpdateMenu(SDL_Event* event, MenuButton& menuButton)
 					return number + 1;
 			}
 		}
+
+return -1;
 }
 
 void DestructMenu(Background& background, MenuButton& menuButton)

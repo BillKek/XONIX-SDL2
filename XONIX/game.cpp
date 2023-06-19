@@ -182,7 +182,7 @@ void RenderGame(SDL_Renderer* ren, Map& map, Player& player, Enemies& enemies, R
 void RenderWinLose(SDL_Renderer* ren, Result& result, const char* win_lose)
 {
 	SDL_Rect rect = { WIN_WIDTH / 2 - 250, WIN_HEIGHT / 2 - 100, 500, 125 };
-	if (win_lose == "win")
+	if (strcmp(win_lose,"win")==0)
 	{
 		result.tex_win = SDL_CreateTextureFromSurface(ren, result.surf_win);
 		SDL_RenderCopy(ren, result.tex_win, NULL, &rect);

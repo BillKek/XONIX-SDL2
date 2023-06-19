@@ -4,8 +4,8 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#define WIN_WIDTH 800
-#define WIN_HEIGHT 700
+#define WIN_WIDTH 1200
+#define WIN_HEIGHT 1000
 #define RECORDS_OFFSET 100
 
 extern SDL_Window* window;
