@@ -44,10 +44,14 @@ void InitButtons(SDL_Renderer* ren, MenuButton& menuButton)
 		{
 			char* textRec = (char*)calloc(20, sizeof(char));
 			strcat_s(textRec, 20, "Рекорд: ");
-			char* tmp = (char*)calloc(5, sizeof(char));
-			int records;
-			fscanf_s(file, "%d", &records);
-			_itoa_s(records, tmp, 5, 10);
+			char* tmp = (char*)calloc(6, sizeof(char)); // 5 + нуль терминатор
+			long records;
+			fscanf_s(file, "%d", &records, 20);
+			_itoa_s(records, tmp, 6, 10);
+            //sprintf_s(tmp,6,"%d",records);
+            //printf(tmp);
+            //printf("\n---\n");
+
 			strcat_s(textRec, 20, tmp);
 
 			menuButton.button[number].textRec = TTF_RenderUTF8_Blended(menuButton.button->font, textRec, colorRec);
